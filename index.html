@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Tutorial: Hello Dojo!</title>
+</head>
+<body>
+    <div id="messages"></div>
+
+    <form id="form">
+        Name: <input type="text" name="name"/><br>
+        Text: <input type="text" name="body"/><br>
+        <input type="button" value="send" onclick="postMessage()"/>
+    </form>
+
+    <!-- load Dojo -->
+    <script src="https://ajax.googleapis.com/ajax/libs/dojo/1.13.0/dojo/dojo.js"
+            data-dojo-config="async: true"></script>
+
+    <script>
+        require(['dojo']);
+
+        loadMessages = function() {
+            var messagesNode = dojo.byId('messages');
+
+            var xhrArgs = {
+                url: "/messages",
+                handleAs: "json",
+                load: function(data) {
+                    messagesNode.innerHTML = "";
+                    for (var i = 0; i < data.length; i++) {
+                        _id = data[i]['id'];
+                        name= data[i]['name'];
+                        body= data[i]['body'];
+
+                        html = "<div id=" + _id + ">";
+                        html += "name : " + name + " ";
+                        html += "text : " + body + " ";
+                        html += "</div>";
+                        messagesNode.innerHTML += html;
+                    }
+                }
+            };
+
+            dojo.xhrGet(xhrArgs);
+        };
+
+        postMessage = function() {
+            var xhrArgs = {
+                url: "/post",
+                postData: dojo.formToJson("form"),
+                handleAs: "json",
+                load: function(data) {
+                    loadMessages();
+                }
+            };
+            
+            dojo.xhrPost(xhrArgs);
+        }
+
+        loadMessages();
+    </script>
+</body>
+</html>
