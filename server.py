@@ -18,7 +18,6 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         l=int(s.headers.getheader('content-length'))
         content=s.rfile.read(l)
 
-        print("%s" % (content))
         message=json.loads(content)
 
         cursor = cnx.cursor()

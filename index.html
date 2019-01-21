@@ -5,12 +5,12 @@
     <title>Tutorial: Hello Dojo!</title>
 </head>
 <body>
-    <div id="messages"></div>
+    <div id="messages" class="forum_messages"></div>
 
     <form id="form">
         Name: <input type="text" name="name"/><br>
         Text: <input type="text" name="body"/><br>
-        <input type="button" value="send" onclick="postMessage()"/>
+        <input type="button" value="send" name="button" onclick="postMessage()"/>
     </form>
 
     <!-- load Dojo -->
@@ -44,7 +44,7 @@
 
             dojo.xhrGet(xhrArgs);
         };
-
+// {"name": "test", "body": "test", "button": "send"}
         postMessage = function() {
             var xhrArgs = {
                 url: "/post",
