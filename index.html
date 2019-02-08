@@ -3,15 +3,42 @@
 <head>
     <meta charset="utf-8">
     <title>Tutorial: Hello Dojo!</title>
+    <link rel="stylesheet" href="https:////ajax.googleapis.com/ajax/libs/dojo/1.13.0/dijit/themes/claro/claro.css" media="screen">
 </head>
-<body>
+<body class="claro">
     <div id="messages" class="forum_messages"></div>
 
-    <form id="form">
+<div class="centerPanel" data-dojo-type="dijit/layout/TabContainer" data-dojo-props="region: 'center', tabPosition: 'top'">
+<div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="title: 'Group 1'" action="" method="">
+    <form id="form" data-dojo-type="dijit/form/Form">
         Name: <input type="text" name="name"/><br>
         Text: <input type="text" name="body"/><br>
-        <input type="button" value="send" name="button" onclick="postMessage()"/>
+        <input type="button" value="send" onclick="postMessage()" data-dojo-type="dijit/form/Button"/>
     </form>
+</div>
+<div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="title: 'Group 2'">
+</div>
+
+<div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="title: 'Group 3'">
+
+
+<div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design: 'headline'">
+    <div class="centerPanel" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'center'">center</div>
+    <div class="demoLayout" style="height: 50%" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="region: 'top', splitter: true, design: 'headline'">
+        <div class="centerPanel" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'center'">center</div>
+        <div class="edgePanel" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'bottom'">bottom</div>
+    </div>
+    <div class="edgePanel" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter: true, region: 'left'">left</div>
+    <div class="demoLayout" style="width: 50%" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="region: 'right', design: 'headline'">
+        <div class="centerPanel" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'center'">center</div>
+        <div class="edgePanel" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'left'">left</div>
+    </div>
+    <div class="edgePanel" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter: true, region: 'bottom'">bottom</div>
+</div>
+
+</div>
+
+</div>
 
     <!-- load Dojo -->
     <script src="https://ajax.googleapis.com/ajax/libs/dojo/1.13.0/dojo/dojo.js"
@@ -19,6 +46,22 @@
 
     <script>
         require(['dojo']);
+
+		require([
+			"dojo/parser",
+			"dijit/form/TextBox",
+			"dijit/form/DateTextBox",
+			"dijit/form/FilteringSelect",
+			"dijit/form/Form",
+			"dojo/store/JsonRest",
+			"dijit/form/Button",
+                        "dijit/layout/TabContainer",
+			"dijit/layout/ContentPane",
+			"dijit/layout/BorderContainer",
+			"dojo/domReady!"
+		], function(parser){
+			parser.parse();
+		});
 
         loadMessages = function() {
             var messagesNode = dojo.byId('messages');
@@ -58,7 +101,7 @@
             dojo.xhrPost(xhrArgs);
         }
 
-        loadMessages();
+//        loadMessages();
     </script>
 </body>
 </html>
